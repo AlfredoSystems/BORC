@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robotics Tournament Scoreboard</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="timer-bar">
+            <!-- Green bar representing time left in the match -->
+        </div>
+        <div class="controls">
+            <button class="start">Start</button>
+            <button class="stop">Stop</button>
+            <button class="replay">Replay</button>
+        </div>
+        <div class="alliance-headings">
+            <div class="alliance-heading">Red Alliance</div>
+            <div class="alliance-heading">Blue Alliance</div>
+        </div>
+        <div class="alliances">
+            <div class="alliance red">
+                <div class="team-numbers">
+                    <input type="text" value="Team 1">
+                    <input type="text" value="Team 2">
+                    <input type="text" value="Team 3">
+                </div>
+                <div class="objectives">
+                    <div class="objective">
+                        <span>Trap:</span>
+                        <input type="number" value="0">
+                    </div>
+                    <div class="objective">
+                        <span>Amp:</span>
+                        <input type="number" value="0">
+                    </div>
+                    <div class="objective">
+                        <span>Speaker:</span>
+                        <input type="number" value="0">
+                    </div>
+                    <div class="objective">
+                        <span>Stage:</span>
+                        <input type="number" value="0">
+                    </div>
+                    <div class="objective">
+                        <span>Mic:</span>
+                        <input type="number" value="0">
+                    </div>
+                </div>
+                <div class="total-points">
+                    <span>Total Points:</span>
+                    <input type="number">
+                </div>
+            </div>
+            <div class="alliance blue">
+                <div class="team-numbers">
+                    <input type="text" value="Team 4">
+                    <input type="text" value="Team 5">
+                    <input type="text" value="Team 6">
+                </div>
+                <div class="objectives">
+                    <div class="objective">
+                        <span>Trap:</span>
+                        <input type="number" value="0">
+                    </div>
+                    <div class="objective">
+                        <span>Amp:</span>
+                        <input type="number" value="0">
+                    </div>
+                    <div class="objective">
+                        <span>Speaker:</span>
+                        <input type="number" value="0">
+                    </div>
+                    <div class="objective">
+                        <span>Stage:</span>
+                        <input type="number" value="0">
+                    </div>
+                    <div class="objective">
+                        <span>Mic:</span>
+                        <input type="number" value="0">
+                    </div>
+                </div>
+                <div class="total-points">
+                    <span>Total Points:</span>
+                    <input type="number">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="index.js"></script>
+
+    <audio id="audioAuto">
+        <source src="sounds/auto.wav" type="audio/wav">
+    </audio>
+
+    <audio id="audioEnd">
+        <source src="sounds/end.wav" type="audio/wav">
+    </audio>
+
+    <audio id="audioEndgame">
+        <source src="sounds/endgame.wav" type="audio/wav">
+    </audio>
+
+    <audio id="audioFault">
+        <source src="sounds/fault.wav" type="audio/wav">
+    </audio>
+
+    <audio id="audioTeleop">
+        <source src="sounds/teleop.wav" type="audio/wav">
+    </audio>
+
+</body>
+</html>

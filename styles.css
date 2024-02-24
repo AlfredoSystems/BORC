@@ -1,0 +1,119 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f2f2f2;
+}
+
+.container {
+    max-width: 80vw;
+    margin: 5vh auto;
+    padding: 2vh;
+    background-color: #fff;
+    border-radius: 2vw;
+    box-shadow: 0 0 2vw rgba(0, 0, 0, 0.1);
+}
+
+.timer-bar {
+    height: 3vh;
+    background-color: #4CAF50; /* Green bar representing time left */
+    margin-bottom: 2vh;
+}
+
+.controls {
+    margin-bottom: 2vh;
+}
+
+.controls button {
+    padding: 2vh 4vh;
+    font-size: 3vh;
+    background-color: #aaa;
+    color: #fff;
+    border: none;
+    border-radius: 1vh;
+    margin-right: 2vw;
+    cursor: pointer;
+}
+
+.alliances {
+    display: flex;
+    justify-content: space-between;
+}
+
+.alliance {
+    width: 45%;
+    padding: 2vh;
+    border-radius: 2vw;
+}
+
+.alliance.red {
+    background-color: #ffcccc; /* Red background for Red Alliance */
+}
+
+.alliance.blue {
+    background-color: #cce6ff; /* Blue background for Blue Alliance */
+}
+
+.alliance-headings {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.alliance-headings div {
+    margin-bottom: 1vh;
+    color: #333;
+    font-size: 4vh;
+    font-weight: bold;
+}
+
+.team-numbers input {
+    width: 8vw;
+    padding: 2vh;
+    margin-bottom: 1vh;
+    border: 0.5vh solid #ccc;
+    border-radius: 1vw;
+    font-weight: bold;
+    font-size: 3vh;
+    justify-content: center;
+}
+
+.objectives {
+    text-align: center;
+}
+
+.objective {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1vh;
+}
+
+.objective span {
+    margin-right: 2vw;
+    width: 10vw; /* Adjusted width for symmetry */
+    text-align: right; /* Adjusted alignment for symmetry */
+}
+
+.objective input {
+    width: 10vw;
+    padding: 2vh;
+    border: 0.5vh solid #ccc;
+    border-radius: 1vw;
+}
+
+.total-points {
+    margin-top: 2vh;
+}
+
+.total-points span {
+    font-weight: bold;
+    margin-right: 2vw;
+}
+
+.total-points input {
+    width: 8vw;
+    padding: 2vh;
+    margin-bottom: 1vh;
+    border: 0.5vh solid #ccc;
+    border-radius: 1vw;
+}
+
