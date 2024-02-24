@@ -35,6 +35,29 @@ body {
     cursor: pointer;
 }
 
+.controls .red-amplify {
+    background-color: red;
+}
+
+.controls .blue-amplify {
+    background-color: blue;
+}
+
+.controls .timer-number {
+    background-color: black;
+}
+
+.timer-number {
+    padding: 2vh 4vh;
+    font-size: 3vh;
+    background-color: #aaa;
+    color: #fff;
+    border: none;
+    border-radius: 1vh;
+    margin-right: 2vw;
+    cursor: pointer;
+}
+
 .alliances {
     display: flex;
     justify-content: space-between;
@@ -98,6 +121,9 @@ body {
     padding: 2vh;
     border: 0.5vh solid #ccc;
     border-radius: 1vw;
+
+    font-weight: bold;
+    font-size: 3vh;
 }
 
 .total-points {
@@ -115,5 +141,8 @@ body {
     margin-bottom: 1vh;
     border: 0.5vh solid #ccc;
     border-radius: 1vw;
+    width: 8vw;
+    font-weight: bold;
+    font-size: 3vh;
 }
 

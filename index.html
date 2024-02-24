@@ -3,18 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Robotics Tournament Scoreboard</title>
+    <title>Crescendo FMS</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="container">
-        <div class="timer-bar">
-            <!-- Green bar representing time left in the match -->
-        </div>
+        <div class="timer-bar"></div>
         <div class="controls">
             <button class="start">Start</button>
             <button class="stop">Stop</button>
-            <button class="replay">Replay</button>
+            <button class="replay">Reset</button>
+            <button class="red-amplify">0</button>
+            <button class="timer-number">150</button>
+            <button class="blue-amplify">0</button>
         </div>
         <div class="alliance-headings">
             <div class="alliance-heading">Red Alliance</div>
@@ -29,29 +30,30 @@
                 </div>
                 <div class="objectives">
                     <div class="objective">
-                        <span>Trap:</span>
-                        <input type="number" value="0">
+                        <span>Note Amp</span>
+                        <input type="number" value="0" name="amp">
                     </div>
                     <div class="objective">
-                        <span>Amp:</span>
-                        <input type="number" value="0">
+                        <span>Note Speaker</span>
+                        <input type="number" value="0" name="speaker">
                     </div>
                     <div class="objective">
-                        <span>Speaker:</span>
-                        <input type="number" value="0">
+                        <span>Note Trap</span>
+                        <input type="number" value="0" name="trap">
                     </div>
                     <div class="objective">
-                        <span>Stage:</span>
-                        <input type="number" value="0">
+                        <span>Onstage</span>
+                        <input type="number" value="0" name="onstage">
                     </div>
                     <div class="objective">
-                        <span>Mic:</span>
-                        <input type="number" value="0">
+                        <span>Harmony</span>
+                        <input type="number" value="0" name="harmony">
                     </div>
                 </div>
                 <div class="total-points">
                     <span>Total Points:</span>
-                    <input type="number">
+                    <input type="number" value="0">
+                    <span>(no leave or spotlight)</span>
                 </div>
             </div>
             <div class="alliance blue">
@@ -62,29 +64,30 @@
                 </div>
                 <div class="objectives">
                     <div class="objective">
-                        <span>Trap:</span>
-                        <input type="number" value="0">
+                        <span>Note Amp</span>
+                        <input type="number" value="0" name="amp">
                     </div>
                     <div class="objective">
-                        <span>Amp:</span>
-                        <input type="number" value="0">
+                        <span>Note Speaker</span>
+                        <input type="number" value="0" name="speaker">
                     </div>
                     <div class="objective">
-                        <span>Speaker:</span>
-                        <input type="number" value="0">
+                        <span>Note Trap</span>
+                        <input type="number" value="0" name="trap">
                     </div>
                     <div class="objective">
-                        <span>Stage:</span>
-                        <input type="number" value="0">
+                        <span>Onstage</span>
+                        <input type="number" value="0" name="onstage">
                     </div>
                     <div class="objective">
-                        <span>Mic:</span>
-                        <input type="number" value="0">
+                        <span>Harmony</span>
+                        <input type="number" value="0" name="harmony">
                     </div>
                 </div>
                 <div class="total-points">
                     <span>Total Points:</span>
-                    <input type="number">
+                    <input type="number" value="0">
+                    <span>(no leave or spotlight)</span>
                 </div>
             </div>
         </div>
