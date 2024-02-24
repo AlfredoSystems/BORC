@@ -48,18 +48,17 @@ document.addEventListener('DOMContentLoaded', function () {
         }
         
         if ('q' === event.key.toLowerCase()) {
-            increaseScore(redAmpInput, ampScore);
-            console.log('queue');
-        } else if ('9' === event.key.toLowerCase()) {
-            increaseScore(blueAmpInput, ampScore);
-
-        } else if ('a' === event.key.toLowerCase()) {
             if(redAmplifyState) speakerScore = 5;
             increaseScore(redSpeakerInput, speakerScore);
-        } else if ('6' === event.key.toLowerCase()) {
+        } else if ('9' === event.key.toLowerCase()) {
             if(blueAmplifyState) speakerScore = 5;
             increaseScore(blueSpeakerInput, speakerScore);
-
+        
+        } else if ('a' === event.key.toLowerCase()) {
+            increaseScore(redAmpInput, ampScore);
+        } else if ('6' === event.key.toLowerCase()) {
+            increaseScore(blueAmpInput, ampScore);
+        
         } else if ('z' === event.key.toLowerCase()) {
             increaseScore(redTrapInput, 5, 15);
         } else if ('3' === event.key.toLowerCase()) {
