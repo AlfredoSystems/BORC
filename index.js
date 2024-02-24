@@ -47,31 +47,32 @@ document.addEventListener('DOMContentLoaded', function () {
             speakerScore = 5;
         }
         
-        if ('w' === event.key.toLowerCase()) {
+        if ('q' === event.key.toLowerCase()) {
             increaseScore(redAmpInput, ampScore);
-        } else if ('w' === event.key.toLowerCase()) {
+            console.log('queue');
+        } else if ('9' === event.key.toLowerCase()) {
             increaseScore(blueAmpInput, ampScore);
 
-        } else if ('w' === event.key.toLowerCase()) {
+        } else if ('a' === event.key.toLowerCase()) {
             if(redAmplifyState) speakerScore = 5;
             increaseScore(redSpeakerInput, speakerScore);
-        } else if ('w' === event.key.toLowerCase()) {
+        } else if ('6' === event.key.toLowerCase()) {
             if(blueAmplifyState) speakerScore = 5;
             increaseScore(blueSpeakerInput, speakerScore);
 
-        } else if ('w' === event.key.toLowerCase()) {
+        } else if ('z' === event.key.toLowerCase()) {
             increaseScore(redTrapInput, 5, 15);
-        } else if ('w' === event.key.toLowerCase()) {
+        } else if ('3' === event.key.toLowerCase()) {
             increaseScore(blueTrapInput, 5, 15);
 
-        } else if ('w' === event.key.toLowerCase()) {
+        } else if ('s' === event.key.toLowerCase()) {
             increaseScore(redOnstageInput, 3, 9);
-        } else if ('w' === event.key.toLowerCase()) {
+        } else if ('5' === event.key.toLowerCase()) {
             increaseScore(blueOnstageInput, 3, 9);
 
-        } else if ('w' === event.key.toLowerCase()) {
+        } else if ('x' === event.key.toLowerCase()) {
             increaseScore(redHarmonyInput, 2, 2);
-        } else if ('w' === event.key.toLowerCase()) {
+        } else if ('2' === event.key.toLowerCase()) {
             increaseScore(blueHarmonyInput, 2, 2);
         }
 
@@ -80,7 +81,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 redAmplifyState = true;        
                 redAmplifyNumber.innerHTML = 10;   
             }  
-        } else if ('w' === event.key.toLowerCase()) {
+        } else if ('8' === event.key.toLowerCase()) {
             if (gameState == 'auto' || gameState == 'teleop'){
                 blueAmplifyState = true;        
                 blueAmplifyNumber.innerHTML = 10;   
@@ -109,6 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         if (timeLeft <= 0) {
+            gameState = "postmatch";
             playSound(audioEnd);
             clearInterval(timerInterval);
         }
@@ -136,7 +138,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function resetTimer() {
         gamestate = "prematch";
+        clearInterval(timerInterval);
         updateTimerDisplay(150);
+
+        redAmplifyNumber.innerHTML == 0
+        blueAmplifyNumber.innerHTML == 0
+
+        let redObjectives = [redAmpInput,redSpeakerInput,redTrapInput,redOnstageInput,redHarmonyInput];
+        let blueObjectives = [blueAmpInput,blueSpeakerInput,blueTrapInput,blueOnstageInput,blueHarmonyInput];
+
+        redObjectives.forEach(element => {
+            element.value = 0;
+        });
+
+        blueObjectives.forEach(element => {
+            element.value = 0;
+        });
+
+        updateTotalPoints()
     }
 
     function updateTimerDisplay(newTime) {
@@ -147,14 +166,24 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function increaseScore(inputElement, scoreValue, maxScore=1000) {
-        let newValue = parseInt(inputElement.value) + scoreVBalue;
+        let newValue = parseInt(inputElement.value) + scoreValue;
         if(newValue <= maxScore) inputElement.value = newValue;
         updateTotalPoints();
     }
 
     function updateTotalPoints() {
-        let redTotal = parseInt(redTrapInput.value) + parseInt(redAmpInput.value);
-        let blueTotal = parseInt(blueTrapInput.value) + parseInt(blueAmpInput.value);
+        let redObjectives = [redAmpInput,redSpeakerInput,redTrapInput,redOnstageInput,redHarmonyInput];
+        let blueObjectives = [blueAmpInput,blueSpeakerInput,blueTrapInput,blueOnstageInput,blueHarmonyInput];
+        let redTotal = 0;
+        let blueTotal = 0;
+
+        redObjectives.forEach(element => {
+            redTotal += parseInt(element.value);
+        });
+
+        blueObjectives.forEach(element => {
+            blueTotal += parseInt(element.value);
+        });
 
         redTotalPointsInput.value = redTotal;
         blueTotalPointsInput.value = blueTotal;
@@ -166,4 +195,3 @@ document.addEventListener('DOMContentLoaded', function () {
         audioElement.play();
     }
 });
-
