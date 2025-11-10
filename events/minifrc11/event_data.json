@@ -5,84 +5,32 @@
   "location": "RTHS",
   "game_title": "ReefScape",
   "teams": [
-    {
-      "rank": 1, "team_number": "73", "name": "Mildstang", "record": "5-1-0", "ranked_points": 20
-    },
-    {
-      "rank": 2, "team_number": "2", "name": "FAST", "record": "5-1-0", "ranked_points": 17
-    },
-    {
-      "rank": 3, "team_number": "39", "name": "Cobra in a Box", "record": "5-1-0", "ranked_points": 17
-    },
-    {
-      "rank": 4, "team_number": "104", "name": "Vertakt", "record": "5-1-0", "ranked_points": 16
-    },
-    {
-      "rank": 5, "team_number": "43", "name": "The Box Trash", "record": "5-1-0", "ranked_points": 16
-    },
-    {
-      "rank": 6, "team_number": "98", "name": "Burn Bestied", "record": "4-2-0", "ranked_points": 15
-    },
-    {
-      "rank": 7, "team_number": "96", "name": "Robo Bulls", "record": "3-2-1", "ranked_points": 12
-    },
-    {
-      "rank": 8, "team_number": "25", "name": "Boned", "record": "3-3-0", "ranked_points": 12
-    },
-    {
-      "rank": 9, "team_number": "100", "name": "Aristocratic Armadillos", "record": "4-2-0", "ranked_points": 12
-    },
-    {
-      "rank": 10, "team_number": "18", "name": "Robonots", "record": "4-2-0", "ranked_points": 12
-    },
-    {
-      "rank": 11, "team_number": "95", "name": "CRUMB", "record": "4-2-0", "ranked_points": 12
-    },
-    {
-      "rank": 12, "team_number": "94", "name": "Undone Brainfolds", "record": "3-2-1", "ranked_points": 11
-    },
-    {
-      "rank": 13, "team_number": "78", "name": "Bearly Metal", "record": "3-3-0", "ranked_points": 10
-    },
-    {
-      "rank": 14, "team_number": "83", "name": "Pink Fluffy Unicorns", "record": "3-3-0", "ranked_points": 10
-    },
-    {
-      "rank": 15, "team_number": "103", "name": "Thunderstorm", "record": "3-3-0", "ranked_points": 10
-    },
-    {
-      "rank": 16, "team_number": "54", "name": "BumBotics", "record": "3-3-0", "ranked_points": 10
-    },
-    {
-      "rank": 17, "team_number": "97", "name": "honse", "record": "3-2-1", "ranked_points": 10
-    },
-    {
-      "rank": 18, "team_number": "74", "name": "Orange Opps", "record": "2-4-0", "ranked_points": 7
-    },
-    {
-      "rank": 19, "team_number": "102", "name": "Anonymouse", "record": "2-3-1", "ranked_points": 7
-    },
-    {
-      "rank": 20, "team_number": "46", "name": "MicroTitan", "record": "2-3-1", "ranked_points": 7
-    },
-    {
-      "rank": 21, "team_number": "40", "name": "Midtown", "record": "1-5-0", "ranked_points": 5
-    },
-    {
-      "rank": 22, "team_number": "67", "name": "CATalytic", "record": "1-4-1", "ranked_points": 5
-    },
-    {
-      "rank": 23, "team_number": "99", "name": "Muggshot", "record": "1-5-0", "ranked_points": 4
-    },
-    {
-      "rank": 24, "team_number": "93", "name": "Tater Bots", "record": "1-5-0", "ranked_points": 4
-    },
-    {
-      "rank": 25, "team_number": "92", "name": "BeastBotics", "record": "0-6-0", "ranked_points": 0
-    },
-    {
-      "rank": 26, "team_number": "101", "name": "Komodo Code", "record": "0-6-0", "ranked_points": 0
-    }
+    {"rank": 1, "team_number": "73", "name": "Mildstang", "record": "5-1-0", "ranked_points": 20},
+    {"rank": 2, "team_number": "2", "name": "FAST", "record": "5-1-0", "ranked_points": 17},
+    {"rank": 3, "team_number": "39", "name": "Cobra in a Box", "record": "5-1-0", "ranked_points": 17},
+    {"rank": 4, "team_number": "104", "name": "Vertakt", "record": "5-1-0", "ranked_points": 16},
+    {"rank": 5, "team_number": "43", "name": "The Box Trash", "record": "5-1-0", "ranked_points": 16},
+    {"rank": 6, "team_number": "98", "name": "Burn Bestied", "record": "4-2-0", "ranked_points": 15},
+    {"rank": 7, "team_number": "96", "name": "Robo Bulls", "record": "3-2-1", "ranked_points": 12},
+    {"rank": 8, "team_number": "25", "name": "Boned", "record": "3-3-0", "ranked_points": 12},
+    {"rank": 9, "team_number": "100", "name": "Aristocratic Armadillos", "record": "4-2-0", "ranked_points": 12},
+    {"rank": 10, "team_number": "18", "name": "Robonots", "record": "4-2-0", "ranked_points": 12},
+    {"rank": 11, "team_number": "95", "name": "CRUMB", "record": "4-2-0", "ranked_points": 12},
+    {"rank": 12, "team_number": "94", "name": "Undone Brainfolds", "record": "3-2-1", "ranked_points": 11},
+    {"rank": 13, "team_number": "78", "name": "Bearly Metal", "record": "3-3-0", "ranked_points": 10},
+    {"rank": 14, "team_number": "83", "name": "Pink Fluffy Unicorns", "record": "3-3-0", "ranked_points": 10},
+    {"rank": 15, "team_number": "103", "name": "Thunderstorm", "record": "3-3-0", "ranked_points": 10},
+    {"rank": 16, "team_number": "54", "name": "BumBotics", "record": "3-3-0", "ranked_points": 10},
+    {"rank": 17, "team_number": "97", "name": "honse", "record": "3-2-1", "ranked_points": 10},
+    {"rank": 18, "team_number": "74", "name": "Orange Opps", "record": "2-4-0", "ranked_points": 7},
+    {"rank": 19, "team_number": "102", "name": "Anonymouse", "record": "2-3-1", "ranked_points": 7},
+    {"rank": 20, "team_number": "46", "name": "MicroTitan", "record": "2-3-1", "ranked_points": 7},
+    {"rank": 21, "team_number": "40", "name": "Midtown", "record": "1-5-0", "ranked_points": 5},
+    {"rank": 22, "team_number": "67", "name": "CATalytic", "record": "1-4-1", "ranked_points": 5},
+    {"rank": 23, "team_number": "99", "name": "Muggshot", "record": "1-5-0", "ranked_points": 4},
+    {"rank": 24, "team_number": "93", "name": "Tater Bots", "record": "1-5-0", "ranked_points": 4},
+    {"rank": 25, "team_number": "92", "name": "BeastBotics", "record": "0-6-0", "ranked_points": 0},
+    {"rank": 26, "team_number": "101", "name": "Komodo Code", "record": "0-6-0", "ranked_points": 0}
   ],
   "matches": [
     {"match_id": "Q1", "video_link": "https://youtu.be/GdWHozYs5Jw?t=2898", "red_alliance": ["98", "40", "39"], "blue_alliance": ["74", "103", "97"], "score_red": 21, "score_blue": 19},
@@ -123,9 +71,9 @@
     {"match_id": "P10", "video_link": null, "red_alliance": [], "blue_alliance": [], "score_red": 0, "score_blue": 0},
     {"match_id": "P11", "video_link": null, "red_alliance": [], "blue_alliance": [], "score_red": 0, "score_blue": 0},
     {"match_id": "P12", "video_link": null, "red_alliance": [], "blue_alliance": [], "score_red": 0, "score_blue": 0},
-    {"match_id": "P13", "video_link": null, "red_alliance": [], "blue_alliance": [], "score_red": 0, "score_blue": 0},
-    {"match_id": "F1", "video_link": null, "red_alliance": [], "blue_alliance": [], "score_red": 0, "score_blue": 0},
-    {"match_id": "F2", "video_link": null, "red_alliance": [], "blue_alliance": [], "score_red": 0, "score_blue": 0}
+    {"match_id": "P13", "video_link": "https://youtu.be/GdWHozYs5Jw?t=27826", "red_alliance": ["A7", "95", "74", "102"], "blue_alliance": ["A6" , "18", "54", "99"], "score_red": 37, "score_blue": 59},
+    {"match_id": "F1", "video_link": "https://youtu.be/GdWHozYs5Jw?t=28653", "red_alliance": ["A1", "39", "43", "97"], "blue_alliance": ["A6" , "18", "54", "99"], "score_red": 61, "score_blue": 45},
+    {"match_id": "F2", "video_link": "https://youtu.be/GdWHozYs5Jw?t=29276",  "red_alliance": ["A1", "39", "43", "97"], "blue_alliance": ["A6" , "18", "54", "99"], "score_red": 76, "score_blue": 68}
   ],
   "awards_html": [
     "<div class=\"bg-white card rounded-xl p-8\">",

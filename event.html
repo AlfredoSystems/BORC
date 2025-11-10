@@ -228,17 +228,20 @@
                     img.alt = `Image of ${robot.name}`;
                     img.className = "h-20 w-32 object-cover mx-auto rounded-md robot-image-thumbnail";
 
-                    const imagePath = `./events/${eventId}/${robot.team_number}.jpg`;
-                    img.src = imagePath;
+                    const baseImagePath = `./events/${eventId}/${robot.team_number}`;
+                    const imagePath = `${baseImagePath}.jpg`; // Try lowercase first
+                    img.src = imagePath; 
 
-                    // If the .jpg image fails to load, display "No Image".
+                    // If the .jpg fails, try .JPG. If that also fails, show "No Image".
                     img.onerror = () => {
-                        const noImageText = document.createTextNode('No Image');
-                        const textSpan = document.createElement('span');
-                        textSpan.className = 'text-xs text-gray-400';
-                        textSpan.appendChild(noImageText);
-                        // Replace the broken image element with the text span
-                        img.parentNode.replaceChild(textSpan, img);
+                        img.onerror = () => { // Set a new error handler for the final fallback
+                            const noImageText = document.createTextNode('No Image');
+                            const textSpan = document.createElement('span');
+                            textSpan.className = 'text-xs text-gray-400';
+                            textSpan.appendChild(noImageText);
+                            img.parentNode.replaceChild(textSpan, img);
+                        };
+                        img.src = `${baseImagePath}.JPG`; // Fallback to uppercase .JPG
                     };
 
                     // Add click listener to open the modal
