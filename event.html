@@ -63,7 +63,7 @@
         <div class="mb-4 border-b border-gray-200">
             <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500">
                 <li class="mr-2">
-                    <button onclick="showTab('robots')" id="robots-tab" class="tab-button inline-block p-4 border-b-2 rounded-t-lg">Robot Rankings</button>
+                    <button onclick="showTab('robots')" id="robots-tab" class="tab-button inline-block p-4 border-b-2 rounded-t-lg">Rankings</button>
                 </li>
                 <li class="mr-2">
                     <button onclick="showTab('matches')" id="matches-tab" class="tab-button inline-block p-4 border-b-2 rounded-t-lg">Match Results</button>
@@ -145,11 +145,13 @@
          * Defaults to a specific file if the parameter is missing.
          */
         async function loadEventData() {
-            showTab('robots'); // Set the initial tab
-
             // 1. Get URL parameters
             const urlParams = new URLSearchParams(window.location.search);
             const eventId = urlParams.get('event');
+            const tabId = urlParams.get('tab');
+
+            // Set the initial tab from the URL, or default to 'robots'
+            showTab(tabId || 'robots'); 
 
             // 2. Determine the JSON file path dynamically
             let jsonFilePath;
@@ -232,16 +234,13 @@
                     const imagePath = `${baseImagePath}.jpg`; // Try lowercase first
                     img.src = imagePath; 
 
-                    // If the .jpg fails, try .JPG. If that also fails, show "No Image".
+                    // If the .jpg image fails to load, display "No Image".
                     img.onerror = () => {
-                        img.onerror = () => { // Set a new error handler for the final fallback
-                            const noImageText = document.createTextNode('No Image');
-                            const textSpan = document.createElement('span');
-                            textSpan.className = 'text-xs text-gray-400';
-                            textSpan.appendChild(noImageText);
-                            img.parentNode.replaceChild(textSpan, img);
-                        };
-                        img.src = `${baseImagePath}.JPG`; // Fallback to uppercase .JPG
+                        const noImageText = document.createTextNode('No Image');
+                        const textSpan = document.createElement('span');
+                        textSpan.className = 'text-xs text-gray-400';
+                        textSpan.appendChild(noImageText);
+                        img.parentNode.replaceChild(textSpan, img);
                     };
 
                     // Add click listener to open the modal
@@ -353,6 +352,12 @@
             // Show the selected tab content and activate its button
             document.getElementById(`${tabName}-content`).classList.remove('hidden');
             document.getElementById(`${tabName}-tab`).classList.add('active');
+
+            // Update the URL with the current tab without reloading the page
+            const urlParams = new URLSearchParams(window.location.search);
+            urlParams.set('tab', tabName);
+            const newUrl = `${window.location.pathname}?${urlParams.toString()}`;
+            window.history.replaceState({path: newUrl}, '', newUrl);
         }
 
         /**
