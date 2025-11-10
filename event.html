@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robotics Event Viewer</title>
+    <!-- Load Tailwind CSS for simple, clean, and responsive styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Use Inter font globally */
+        body { font-family: 'Inter', sans-serif; background-color: #f4f7f9; }
+        .card { box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1); }
+        .table-header { background-color: #4dae50; color: white; } /* Main accent green */
+        .accent-border { border-color: #4dae50; }
+        .accent-text { color: #4dae50; }
+        .accent-link { color: #4dae50; }
+        .accent-link:hover { color: #3a8a40; } /* A darker shade for hover */
+
+        /* Styles for active and inactive tabs */
+        .tab-button.active { border-color: #4dae50; color: #4dae50; }
+        .tab-button { border-color: transparent; }
+        .tab-button:hover { border-color: #d1d5db; color: #4b5563; }
+
+        /* Image Modal Styles */
+        #image-modal { transition: opacity 0.2s ease-in-out; }
+        .robot-image-thumbnail { cursor: pointer; }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-6xl mx-auto">
+        <!-- This div is a placeholder for the main content, to handle modal overlay -->
+        <div id="main-content">
+
+        <!-- Event Header -->
+        <div class="bg-white card p-6 rounded-xl mb-8 border-t-4 accent-border">
+            <a href="./index.html" class="text-sm accent-link hover:underline mb-2 inline-block">
+                &larr; Back to All Events
+            </a>
+            <p class="text-sm font-medium text-gray-500" id="game-title">Loading...</p>
+            <h1 class="text-3xl md:text-4xl font-extrabold text-gray-800 mt-1" id="event-name">
+                Robotics Event Viewer
+            </h1>
+            <div class="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm text-gray-600">
+                <span id="event-date" class="flex items-center">
+                    <!-- Placeholder for Date -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 accent-text" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+                    </svg>
+                    --/--/----
+                </span>
+                <span id="event-location" class="flex items-center">
+                    <!-- Placeholder for Location -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 accent-text" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                    </svg>
+                    Loading...
+                </span>
+            </div>
+        </div>
+
+        <!-- Tab Navigation -->
+        <div class="mb-4 border-b border-gray-200">
+            <ul class="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500">
+                <li class="mr-2">
+                    <button onclick="showTab('robots')" id="robots-tab" class="tab-button inline-block p-4 border-b-2 rounded-t-lg">Robot Rankings</button>
+                </li>
+                <li class="mr-2">
+                    <button onclick="showTab('matches')" id="matches-tab" class="tab-button inline-block p-4 border-b-2 rounded-t-lg">Match Results</button>
+                </li>
+                <li class="mr-2">
+                    <button onclick="showTab('awards')" id="awards-tab" class="tab-button inline-block p-4 border-b-2 rounded-t-lg">Awards</button>
+                </li>
+                <li>
+                    <button onclick="showTab('media')" id="media-tab" class="tab-button inline-block p-4 border-b-2 rounded-t-lg">Media</button>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Tab Content -->
+        <div id="tab-content">
+            <!-- Robot List Section -->
+            <section id="robots-content" class="tab-pane">
+                <div class="overflow-x-auto bg-white card rounded-xl">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead>
+                            <tr>
+                                <th class="px-6 py-3 table-header text-center text-xs font-bold uppercase tracking-wider rounded-tl-xl">Rank</th>
+                                <th class="px-6 py-3 table-header text-center text-xs font-bold uppercase tracking-wider">Team</th>
+                                <th class="px-6 py-3 table-header text-center text-xs font-bold uppercase tracking-wider">Robot Name</th>
+                                <th class="px-6 py-3 table-header text-center text-xs font-bold uppercase tracking-wider">Record (W-L-T)</th>
+                                <th class="px-6 py-3 table-header text-center text-xs font-bold uppercase tracking-wider">Ranked Points</th>
+                                <th class="px-6 py-3 table-header text-center text-xs font-bold uppercase tracking-wider rounded-tr-xl">Image</th>
+                            </tr>
+                        </thead>
+                        <tbody id="robots-table-body" class="bg-white divide-y divide-gray-100"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Match Results Section -->
+            <section id="matches-content" class="tab-pane hidden">
+                <div class="overflow-x-auto bg-white card rounded-xl">
+                    <table class="min-w-full divide-y divide-gray-200">
+                        <thead>
+                            <tr>
+                                <th class="px-6 py-3 table-header text-center text-xs font-bold uppercase tracking-wider rounded-tl-xl">Video</th>
+                                <th class="px-6 py-3 table-header text-center text-xs font-bold uppercase tracking-wider ">Match #</th>
+                                <th class="px-6 py-3 table-header text-center text-xs font-bold uppercase tracking-wider">Red Alliance</th>
+                                <th class="px-6 py-3 table-header text-center text-xs font-bold uppercase tracking-wider">Blue Alliance</th>
+                                <th class="px-3 py-3 table-header text-center text-xs font-bold uppercase tracking-wider">Red Score</th>
+                                <th class="px-3 py-3 table-header text-center text-xs font-bold uppercase tracking-wider">Blue Score</th>
+                                <th class="px-6 py-3 table-header text-center text-xs font-bold uppercase tracking-wider rounded-tr-xl">Winner</th>
+                            </tr>
+                        </thead>
+                        <tbody id="matches-table-body" class="bg-white divide-y divide-gray-100"></tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- Placeholder Sections -->
+            <section id="awards-content" class="tab-pane hidden">
+                <!-- Awards content will be dynamically inserted here -->
+            </section>
+            <section id="media-content" class="tab-pane hidden"><div class="bg-white card rounded-xl p-8 text-center text-gray-500">Media content will be available here.</div></section>
+        </div>
+        </div> <!-- End of main-content -->
+    </div>
+
+    <!-- Image Modal -->
+    <div id="image-modal" class="fixed inset-0 bg-black bg-opacity-80 flex items-center justify-center p-4 hidden z-50" onclick="closeModal()">
+        <img id="modal-image" src="" alt="Full resolution robot image" class="max-w-[95vw] max-h-[95vh] object-contain" onclick="event.stopPropagation()">
+        <button class="absolute top-4 right-6 text-white text-4xl font-bold hover:text-gray-300" onclick="closeModal()">&times;</button>
+    </div>
+
+    <!-- JavaScript to Fetch and Display Data -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadEventData();
+            setupModal();
+        });
+
+        /**
+         * Fetches event data from a JSON file specified by the URL parameter 'event'.
+         * Defaults to a specific file if the parameter is missing.
+         */
+        async function loadEventData() {
+            showTab('robots'); // Set the initial tab
+
+            // 1. Get URL parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            const eventId = urlParams.get('event');
+
+            // 2. Determine the JSON file path dynamically
+            let jsonFilePath;
+            
+            if (eventId) {
+                jsonFilePath = `./events/${eventId}/event_data.json`;
+                console.log(`Loading data for event ID: ${eventId} from path: ${jsonFilePath}`);
+            } else {
+                // Default path if no 'event' parameter is provided (e.g., when viewing the page directly)
+                //jsonFilePath = './event_2025_championship.json';
+                console.warn(`No 'event' parameter in URL. Loading default file: ${jsonFilePath}`);
+            }
+            
+            try {
+                // 3. Fetch the JSON file from the repository
+                const response = await fetch(jsonFilePath);
+
+                // Handle HTTP errors (e.g., 404 Not Found)
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status} - Could not find file at ${jsonFilePath}`);
+                }
+
+                // 4. Parse the JSON body into a JavaScript object
+                const data = await response.json();
+
+                // 5. Update Event Header Details
+                document.getElementById('game-title').textContent = data.game_title || 'N/A';
+                document.getElementById('event-name').textContent = data.event_name || 'Event Details';
+                document.title = data.event_name || 'Robotics Event Viewer';
+                document.getElementById('event-date').innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 accent-text" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clip-rule="evenodd" />
+                    </svg>
+                    ${data.date || 'N/A'}
+                `;
+                document.getElementById('event-location').innerHTML = `
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4 mr-1 accent-text" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd" />
+                    </svg>
+                    ${data.location || 'N/A'}
+                `;
+
+
+                // 6. Populate Robots Table
+                const robotsBody = document.getElementById('robots-table-body');
+                robotsBody.innerHTML = ''; // Clear existing content
+                data.teams.forEach((robot, index) => {
+                    const row = robotsBody.insertRow();
+                    
+                    row.className = index % 2 === 0 ? 'bg-white hover:bg-gray-200' : 'bg-gray-100 hover:bg-gray-200';
+                    
+                    const rankCell = row.insertCell();
+                    rankCell.className = 'px-6 py-4 text-center font-bold';
+                    rankCell.textContent = robot.rank;
+
+                    const teamCell = row.insertCell();
+                    teamCell.className = 'px-6 py-4 text-center';
+                    teamCell.textContent = robot.team_number;
+                    const nameCell = row.insertCell();
+                    nameCell.className = 'px-6 py-4 text-center';
+                    nameCell.textContent = robot.name;
+
+                    const recordCell = row.insertCell();
+                    recordCell.className = 'px-6 py-4 text-center';
+                    recordCell.textContent = robot.record;
+
+                    const rankedPointsCell = row.insertCell();
+                    rankedPointsCell.className = 'px-6 py-4 text-center';
+                    rankedPointsCell.textContent = robot.ranked_points;
+
+                    // Create and populate the image cell
+                    const imageCell = row.insertCell();
+                    imageCell.className = 'px-6 py-4 text-center';
+
+                    const img = document.createElement('img');
+                    img.alt = `Image of ${robot.name}`;
+                    img.className = "h-20 w-32 object-cover mx-auto rounded-md robot-image-thumbnail";
+
+                    const imagePath = `./events/${eventId}/${robot.team_number}.jpg`;
+                    img.src = imagePath;
+
+                    // If the .jpg image fails to load, display "No Image".
+                    img.onerror = () => {
+                        const noImageText = document.createTextNode('No Image');
+                        const textSpan = document.createElement('span');
+                        textSpan.className = 'text-xs text-gray-400';
+                        textSpan.appendChild(noImageText);
+                        // Replace the broken image element with the text span
+                        img.parentNode.replaceChild(textSpan, img);
+                    };
+
+                    // Add click listener to open the modal
+                    img.onclick = () => {
+                        openModal(imagePath);
+                    };
+                    imageCell.appendChild(img);
+                });
+
+                // 7. Populate Matches Table
+                const matchesBody = document.getElementById('matches-table-body');
+                matchesBody.innerHTML = ''; // Clear existing content
+                data.matches.forEach((match, index) => {
+                    const row = matchesBody.insertRow();
+                    row.className = 'bg-white';
+
+                    // Video Link
+                    const videoCell = row.insertCell();
+                    videoCell.className = 'px-6 py-4 text-center'; // Center the icon
+                    if (match.video_link) {
+                        videoCell.innerHTML = `<a href="${match.video_link}" target="_blank" rel="noopener noreferrer" class="accent-link font-bold">(▶)</a>`;
+                    } else {
+                        videoCell.textContent = '-';
+                    }
+
+                    // Match Number
+                    const matchIdCell = row.insertCell();
+                    matchIdCell.className = 'px-6 py-4 text-center';
+                    matchIdCell.textContent = match.match_id;
+
+                    // Teams (e.g., "123A vs 456X")
+                    const redAllianceCell = row.insertCell();
+                    redAllianceCell.className = 'px-6 py-4 text-center bg-red-50';
+                    redAllianceCell.textContent = match.red_alliance.join(' - ');
+
+                    // Teams (e.g., "123A vs 456X")
+                    const blueAllianceCell = row.insertCell();
+                    blueAllianceCell.className = 'px-6 py-4 text-center bg-blue-50';
+                    blueAllianceCell.textContent = match.blue_alliance.join(' - ');
+
+                    // Red Score
+                    const redScoreCell = row.insertCell();
+                    redScoreCell.className = 'px-3 py-4 text-center bg-red-100 font-bold';
+                    redScoreCell.textContent = match.score_red;
+                    
+                    // Blue Score
+                    const blueScoreCell = row.insertCell();
+                    blueScoreCell.className = 'px-3 py-4 text-center bg-blue-100 font-bold';
+                    blueScoreCell.textContent = match.score_blue;
+
+                    // Winner with conditional styling
+                    const winnerCell = row.insertCell();
+                    winnerCell.className = 'px-6 py-4 text-center font-bold';
+                    
+                    let outcomeText = '';
+                    let outcomeColorClass = '';
+
+                    if (match.score_red > match.score_blue) {
+                        outcomeText = 'Red Win';
+                        outcomeColorClass = 'text-red-600';
+                    } else if (match.score_blue > match.score_red) {
+                        outcomeText = 'Blue Win';
+                        outcomeColorClass = 'text-blue-600';
+                    } else {
+                        outcomeText = 'Tie';
+                        outcomeColorClass = 'text-gray-600';
+                    }
+                    winnerCell.textContent = outcomeText;
+                    winnerCell.classList.add(outcomeColorClass);
+                });
+
+                // 8. Populate Awards Section
+                const awardsContent = document.getElementById('awards-content');
+                if (data.awards_html) {
+                    // Handle both string and array-of-strings format for awards_html
+                    const awardsHtmlContent = Array.isArray(data.awards_html) 
+                        ? data.awards_html.join('') 
+                        : data.awards_html;
+                    awardsContent.innerHTML = awardsHtmlContent;
+                } else {
+                    awardsContent.innerHTML = `
+                        <div class="bg-white card rounded-xl p-8 text-center text-gray-500">No awards information is available for this event.</div>
+                    `;
+                }
+
+            } catch (error) {
+                console.error("Failed to load event data:", error);
+                // Display a user-friendly error message on the page
+                document.getElementById('event-name').textContent = 'Error Loading Event Data';
+                document.getElementById('game-title').textContent = `Could not load file: ${jsonFilePath}`;
+            }
+        }
+
+        /**
+         * Shows the specified tab content and hides others.
+         * @param {string} tabName - The name of the tab to show (e.g., 'robots', 'matches').
+         */
+        function showTab(tabName) {
+            // Hide all tab content panes
+            document.querySelectorAll('.tab-pane').forEach(pane => {
+                pane.classList.add('hidden');
+            });
+
+            // Deactivate all tab buttons
+            document.querySelectorAll('.tab-button').forEach(button => {
+                button.classList.remove('active');
+            });
+
+            // Show the selected tab content and activate its button
+            document.getElementById(`${tabName}-content`).classList.remove('hidden');
+            document.getElementById(`${tabName}-tab`).classList.add('active');
+        }
+
+        /**
+         * Sets up event listeners for the image modal.
+         */
+        function setupModal() {
+            // Close modal with the Escape key
+            document.addEventListener('keydown', (event) => {
+                if (event.key === 'Escape') {
+                    closeModal();
+                }
+            });
+        }
+
+        /**
+         * Opens the image modal with the specified image source.
+         * @param {string} src - The source path of the image to display.
+         */
+        function openModal(src) {
+            const modal = document.getElementById('image-modal');
+            const modalImg = document.getElementById('modal-image');
+            
+            modalImg.src = src;
+            modal.classList.remove('hidden');
+            document.body.style.overflow = 'hidden'; // Prevent background scrolling
+        }
+
+        /**
+         * Closes the image modal.
+         */
+        function closeModal() {
+            const modal = document.getElementById('image-modal');
+            modal.classList.add('hidden');
+            document.body.style.overflow = ''; // Restore background scrolling
+        }
+    </script>
+</body>
+</html>
