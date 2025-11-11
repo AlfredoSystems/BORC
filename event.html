@@ -88,8 +88,8 @@
                                 <th class="px-6 py-3 table-header text-center text-xs font-bold uppercase tracking-wider rounded-tl-xl">Rank</th>
                                 <th class="px-6 py-3 table-header text-center text-xs font-bold uppercase tracking-wider">Team</th>
                                 <th class="px-6 py-3 table-header text-center text-xs font-bold uppercase tracking-wider">Robot Name</th>
-                                <th class="px-6 py-3 table-header text-center text-xs font-bold uppercase tracking-wider">Record (W-L-T)</th>
-                                <th class="px-6 py-3 table-header text-center text-xs font-bold uppercase tracking-wider">Ranked Points</th>
+                                <th class="px-6 py-3 table-header text-center text-xs font-bold uppercase tracking-wider">Qual Record (W-L-T)</th>
+                                <th class="px-6 py-3 table-header text-center text-xs font-bold uppercase tracking-wider">Ranked Score</th>
                                 <th class="px-6 py-3 table-header text-center text-xs font-bold uppercase tracking-wider rounded-tr-xl">Image</th>
                             </tr>
                         </thead>
@@ -194,7 +194,6 @@
                     ${data.location || 'N/A'}
                 `;
 
-
                 // 6. Populate Robots Table
                 const robotsBody = document.getElementById('robots-table-body');
                 robotsBody.innerHTML = ''; // Clear existing content
@@ -218,9 +217,23 @@
                     recordCell.className = 'px-6 py-4 text-center';
                     recordCell.textContent = robot.record;
 
-                    const rankedPointsCell = row.insertCell();
-                    rankedPointsCell.className = 'px-6 py-4 text-center';
-                    rankedPointsCell.textContent = robot.ranked_points;
+                    const rankedScoreCell = row.insertCell();
+                    rankedScoreCell.className = 'px-6 py-4 text-center';
+                    
+                    // Calculate matches played from the team's record (W-L-T)
+                    let matchesPlayed = 0;
+                    if (robot.record) {
+                        const recordParts = robot.record.split('-').map(Number);
+                        if (recordParts.length === 3) {
+                            matchesPlayed = recordParts.reduce((sum, part) => sum + (isNaN(part) ? 0 : part), 0);
+                        }
+                    }
+                    
+                    // Calculate and display the ranked score
+                    const rankedScore = matchesPlayed > 0 
+                        ? (robot.ranked_points / matchesPlayed).toFixed(2) 
+                        : '0.00';
+                    rankedScoreCell.textContent = rankedScore;
 
                     // Create and populate the image cell
                     const imageCell = row.insertCell();
@@ -261,7 +274,7 @@
                     // Video Link
                     const videoCell = row.insertCell();
                     videoCell.className = 'px-6 py-4 text-center'; // Center the icon
-                    if (match.video_link) {
+                    if (match.video_link && match.video_link !== 'null') {
                         videoCell.innerHTML = `<a href="${match.video_link}" target="_blank" rel="noopener noreferrer" class="accent-link font-bold">(▶)</a>`;
                     } else {
                         videoCell.textContent = '-';
