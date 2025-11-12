@@ -13,8 +13,7 @@
         .table-header { background-color: #4dae50; color: white; } /* Main accent green */
         .accent-border { border-color: #4dae50; }
         .accent-text { color: #4dae50; }
-        .accent-link { color: #4dae50; }
-        .accent-link:hover { color: #3a8a40; } /* A darker shade for hover */
+        .accent-link { color: #4dae50; text-decoration: none; }
 
         /* Styles for active and inactive tabs */
         .tab-button.active { border-color: #4dae50; color: #4dae50; }
@@ -34,7 +33,7 @@
 
         <!-- Event Header -->
         <div class="bg-white card p-6 rounded-xl mb-8 border-t-4 accent-border">
-            <a href="./index.html" class="text-sm accent-link hover:underline mb-2 inline-block">
+            <a href="./index.html" class="text-sm accent-link mb-2 inline-block" style="text-decoration: underline;">
                 &larr; Back to All Events
             </a>
             <p class="text-sm font-medium text-gray-500" id="game-title">Loading...</p>
@@ -239,16 +238,18 @@
                     const imageCell = row.insertCell();
                     imageCell.className = 'px-6 py-4 text-center';
 
+                    // Path for the .webp image
+                    const imageBase = `./events/${eventId}/${robot.team_number}`;
+                    const webpPath = `${imageBase}.webp`;
+
+                    // Create the <img> element for the .webp image
                     const img = document.createElement('img');
+                    img.src = webpPath;
                     img.alt = `Image of ${robot.name}`;
                     img.className = "h-20 w-32 object-cover mx-auto rounded-md robot-image-thumbnail";
                     img.loading = 'lazy';
 
-                    const baseImagePath = `./events/${eventId}/${robot.team_number}`;
-                    const imagePath = `${baseImagePath}.jpg`; // Try lowercase first
-                    img.src = imagePath; 
-
-                    // If the .jpg image fails to load, display "No Image".
+                    // If the .webp image fails to load, display "No Image"
                     img.onerror = () => {
                         const noImageText = document.createTextNode('No Image');
                         const textSpan = document.createElement('span');
@@ -257,10 +258,7 @@
                         img.parentNode.replaceChild(textSpan, img);
                     };
 
-                    // Add click listener to open the modal
-                    img.onclick = () => {
-                        openModal(imagePath);
-                    };
+                    img.onclick = () => openModal(img.src);
                     imageCell.appendChild(img);
                 });
 
