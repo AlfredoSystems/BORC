@@ -40,7 +40,7 @@
     {"rank": 34, "team_number": "105", "name": "Defuzed", "record": "0-5-1", "ranked_points": 1}
   ],
   "matches": [
-    {"match_id": "Q1", "video_link": null, "red_alliance": ["103", "18", "78"], "blue_alliance": ["39", "49", "96"], "score_red": 67, "score_blue": 10},
+    {"match_id": "Q1", "video_link": "https://youtu.be/GF_TEoLwjDM?t=2807", "red_alliance": ["103", "18", "78"], "blue_alliance": ["39", "49", "96"], "score_red": 67, "score_blue": 10},
     {"match_id": "Q2", "video_link": null, "red_alliance": ["108", "67", "139"], "blue_alliance": ["94", "104", "105"], "score_red": 32, "score_blue": 16},
     {"match_id": "Q3", "video_link": null, "red_alliance": ["79", "1", "111"], "blue_alliance": ["2", "25", "106"], "score_red": 9, "score_blue": 19},
     {"match_id": "Q4", "video_link": null, "red_alliance": ["74", "112", "114"], "blue_alliance": ["109", "120", "107"], "score_red": 35, "score_blue": 0},
