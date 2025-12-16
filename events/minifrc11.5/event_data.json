@@ -78,7 +78,7 @@
     {"match_id": "P2", "video_link": null, "red_alliance": ["A4", "139", "1", "104", "107"], "blue_alliance": ["A5", "83", "2", "105", "115"], "score_red": 30, "score_blue": 32},
     {"match_id": "P3", "video_link": null, "red_alliance": ["A2", "78", "25", "109", "113"], "blue_alliance": ["A7", "108", "116", "103", "106"], "score_red": 93, "score_blue": 29},
     {"match_id": "P4", "video_link": null, "red_alliance": ["A3", "67", "49", "96", "112"], "blue_alliance": ["A6", "94", "79", "39", "120"], "score_red": 52, "score_blue": 35},
-    {"match_id": "P5", "video_link": null, "red_alliance": ["A8", "70", "18", "114", "119"], "blue_alliance": ["A4", "139", "1", "104", "107"], "score_red": 45, "score_blue": 93},
+    {"match_id": "P5", "video_link": null, "red_alliance": ["A8", "70", "18", "114", "119"], "blue_alliance": ["A4", "139", "1", "104", "107"], "score_red": 45, "score_blue": 47},
     {"match_id": "P6", "video_link": null, "red_alliance": ["A7", "108", "116", "103", "106"], "blue_alliance": ["A6", "94", "79", "39", "120"], "score_red": 31, "score_blue": 75},
     {"match_id": "P7", "video_link": null, "red_alliance": ["A1", "74", "73", "36", "111"], "blue_alliance": ["A5", "83", "2", "105", "115"], "score_red": 58, "score_blue": 65},
     {"match_id": "P8", "video_link": null, "red_alliance": ["A2", "78", "25", "109", "113"], "blue_alliance": ["A3", "67", "49", "96", "112"], "score_red": 71, "score_blue": 63},
