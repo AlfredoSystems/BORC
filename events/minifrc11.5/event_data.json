@@ -95,7 +95,13 @@
   "awards_html": [
     "<div class=\"bg-white card rounded-xl p-8\">",
     "    <h2 class=\"text-2xl font-bold text-gray-800 mb-6 text-center\">Event Awards</h2>",
-    "        </div>",
+    "    <div class=\"space-y-6 max-w-3xl mx-auto\">",
+    "        <div><h3 class=\"text-lg font-semibold accent-text\">BYTE AWARD</h3><p class=\"text-gray-700\">– Millennium Falcons (120)</p></div>",
+    "        <div><h3 class=\"text-lg font-semibold accent-text\">JUDGES AWARD</h3><p class=\"text-gray-700\">– Smoky Circuits (109)</p></div>",
+    "        <div><h3 class=\"text-lg font-semibold accent-text\">COMPLEXITY AWARD</h3><p class=\"text-gray-700\">– Boned (25)</p></div>",
+    "        <div><h3 class=\"text-lg font-semibold accent-text\">ROBOT REVEAL</h3><p class=\"text-gray-700\">– CATalytic (67)</p></div>",
+    "        <div><h3 class=\"text-lg font-semibold accent-text\">The Engineering Inspiration Award</h3><p class=\"text-gray-700\">– Raspberry Phi (115)</p></div>",
+    "        <div><h3 class=\"text-lg font-semibold accent-text\">MEMEPACT</h3><p class=\"text-gray-700\">– Minions (111)</p></div>",
     "    </div>",
     "</div>"
   ]
