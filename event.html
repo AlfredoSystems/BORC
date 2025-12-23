@@ -379,14 +379,7 @@
                         videosContainer.classList.remove('hidden');
                         videosGrid.innerHTML = '';
                         videos.forEach(video => {
-                            let videoId;
-                            try {
-                                // Handles standard youtube.com/watch?v=... links
-                                videoId = new URL(video.url).searchParams.get('v');
-                            } catch (e) {
-                                // Handles youtu.be/... short links
-                                videoId = video.url.split('/').pop().split('?')[0];
-                            }
+                            const videoId = getYouTubeID(video.url);
                             const thumbnailUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
                             
                             const videoCard = `
@@ -450,6 +443,21 @@
                 document.getElementById('event-name').textContent = 'Error Loading Event Data';
                 document.getElementById('game-title').textContent = `Could not load file: ${jsonFilePath}`;
             }
+        }
+
+        /**
+         * Extracts the YouTube video ID from various URL formats.
+         * @param {string} url - The YouTube URL.
+         * @returns {string|null} The video ID or null if not found.
+         */
+        function getYouTubeID(url) {
+            const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+            const match = url.match(regExp);
+
+            if (match && match[2].length === 11) {
+                return match[2];
+            }
+            return null;
         }
 
         /**
