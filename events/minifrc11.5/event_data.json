@@ -92,6 +92,12 @@
     {"match_id": "F2", "video_link": null, "red_alliance": ["A2", "78", "25", "109", "113"], "blue_alliance": ["A1", "74", "73", "36", "111"], "score_red": 99, "score_blue": 51},
     {"match_id": "F3", "video_link": null, "red_alliance": ["A2", "78", "25", "109", "113"], "blue_alliance": ["A1", "74", "73", "36", "111"], "score_red": 87, "score_blue": 98}
   ],
+  "media_gallery": [
+    { "type": "youtube", "url": "https://youtu.be/XnWqzhm5Kfc", "title": "109 - Smoky Circuits Reveal" },
+    { "type": "youtube", "url": "https://youtu.be/GgPQxPl-fks", "title": "67 - CATalytic Reveal" },
+    { "type": "youtube", "url": "https://youtu.be/hFWzDoMEnas", "title": "78 - Bearly Metal Reveal" },
+    { "type": "youtube", "url": "https://youtu.be/jVq4nufRk7s", "title": "94 - Undone Brainfolds Reveal" }
+  ],
   "awards_html": [
     "<div class=\"bg-white card rounded-xl p-8\">",
     "    <h2 class=\"text-2xl font-bold text-gray-800 mb-6 text-center\">Event Awards</h2>",

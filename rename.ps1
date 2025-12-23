@@ -1,5 +1,5 @@
 # 1. Go to the target folder
-$folderPath = "C:\Users\Jacob\Videos\MiniFRC event data\MiniFRC 11.5"
+$folderPath = "C:\Users\Jacob\Videos\MiniFRC event data\MiniFRC 11.5\robots"
 Set-Location -Path $folderPath
 
 # 2. Get all JPG files

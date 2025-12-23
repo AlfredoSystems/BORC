@@ -23,6 +23,13 @@
         /* Image Modal Styles */
         #image-modal { transition: opacity 0.2s ease-in-out; }
         .robot-image-thumbnail { cursor: pointer; }
+
+        /* Media Gallery Styles */
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
     </style>
 </head>
 <body class="p-4 md:p-8">
@@ -121,7 +128,24 @@
             <section id="awards-content" class="tab-pane hidden">
                 <!-- Awards content will be dynamically inserted here -->
             </section>
-            <section id="media-content" class="tab-pane hidden"><div class="bg-white card rounded-xl p-8 text-center text-gray-500">Media content will be available here.</div></section>
+            <section id="media-content" class="tab-pane hidden space-y-8">
+                <!-- Robot Reveal Videos Section -->
+                <div id="videos-container" class="bg-white card rounded-xl p-6 hidden">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Videos</h2>
+                    <div id="videos-grid" class="media-grid">
+                        <!-- Videos will be inserted here -->
+                    </div>
+                </div>
+
+                <!-- Event Media Gallery Section -->
+                <div id="media-gallery-container" class="bg-white card rounded-xl p-6 hidden">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-4">Event Gallery</h2>
+                    <div id="media-gallery-grid" class="media-grid">
+                        <!-- Media gallery images will be inserted here -->
+                    </div>
+                </div>
+                <div id="no-media-message" class="bg-white card rounded-xl p-8 text-center text-gray-500 hidden">No media is available for this event.</div>
+            </section>
         </div>
         </div> <!-- End of main-content -->
     </div>
@@ -239,8 +263,8 @@
                     imageCell.className = 'px-6 py-4 text-center';
 
                     // Path for the .webp image
-                    const imageBase = `./events/${eventId}/${robot.team_number}`;
-                    const webpPath = `${imageBase}.webp`;
+                    const imageBase = `./events/${eventId}/robots/${robot.team_number}`;
+                    const webpPath = `${imageBase}.jpg`;
 
                     // Create the <img> element for the .webp image
                     const img = document.createElement('img');
@@ -338,6 +362,81 @@
                     `;
                 }
 
+                // 9. Populate Media Tab
+                const videosContainer = document.getElementById('videos-container');
+                const videosGrid = document.getElementById('videos-grid');
+                const mediaGalleryContainer = document.getElementById('media-gallery-container');
+                const mediaGalleryGrid = document.getElementById('media-gallery-grid');
+                const noMediaMessage = document.getElementById('no-media-message');
+                
+                let hasMedia = false;
+
+                // Populate Videos from media_gallery
+                if (data.media_gallery && data.media_gallery.length > 0) {
+                    const videos = data.media_gallery.filter(item => item.type === 'youtube' && item.url);
+                    if (videos.length > 0) {
+                        hasMedia = true;
+                        videosContainer.classList.remove('hidden');
+                        videosGrid.innerHTML = '';
+                        videos.forEach(video => {
+                            const videoId = new URL(video.url).searchParams.get('v') || video.url.split('/').pop();
+                            const thumbnailUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
+                            
+                            const videoCard = `
+                                <a href="${video.url}" target="_blank" rel="noopener noreferrer" class="block rounded-lg overflow-hidden group border hover:border-gray-300">
+                                    <div class="relative">
+                                        <img src="${thumbnailUrl}" alt="Video thumbnail for ${video.title}" class="w-full h-auto object-cover transition-transform group-hover:scale-105">
+                                        <div class="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+                                            <svg class="w-12 h-12 text-white opacity-80" fill="currentColor" viewBox="0 0 20 20"><path d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z"></path></svg>
+                                        </div>
+                                    </div>
+                                    <div class="p-3 bg-gray-50">
+                                        <p class="font-bold text-gray-800 truncate">${video.title || 'Robot Reveal'}</p>
+                                    </div>
+                                </a>
+                            `;
+                            videosGrid.innerHTML += videoCard;
+                        });
+                    }
+                }
+
+                // Auto-discover and populate Media Gallery images
+                const imageBaseUrl = `./events/${eventId}/media/`;
+                const imageExtensions = ['webp', 'jpg', 'jpeg', 'png', 'gif'];
+                let imageFound = false;
+
+                for (let i = 1; i <= 50; i++) { // Try to load up to 50 images
+                    let foundForIndex = false;
+                    for (const ext of imageExtensions) {
+                        const imagePath = `${imageBaseUrl}${i}.${ext}`;
+                        
+                        // Use a closure to correctly capture imagePath
+                        const checkImage = (path) => new Promise(resolve => {
+                            const tester = new Image();
+                            tester.onload = () => resolve(true);
+                            tester.onerror = () => resolve(false);
+                            tester.src = path;
+                        });
+
+                        if (await checkImage(imagePath)) {
+                            if (!imageFound) { // First image found
+                                hasMedia = true;
+                                imageFound = true;
+                                mediaGalleryContainer.classList.remove('hidden');
+                                mediaGalleryGrid.innerHTML = '';
+                            }
+                            const galleryItem = `<div class="media-item rounded-lg overflow-hidden border"><img src="${imagePath}" alt="Event media image ${i}" class="w-full h-full object-cover robot-image-thumbnail" loading="lazy" onclick="openModal('${imagePath}')"></div>`;
+                            mediaGalleryGrid.innerHTML += galleryItem;
+                            foundForIndex = true;
+                            break; // Move to the next index once an image (any extension) is found
+                        }
+                    }
+                    if (!foundForIndex && imageFound) break; // Stop if we found images but the current index is missing
+                }
+
+                if (!hasMedia) {
+                    noMediaMessage.classList.remove('hidden');
+                }
             } catch (error) {
                 console.error("Failed to load event data:", error);
                 // Display a user-friendly error message on the page
