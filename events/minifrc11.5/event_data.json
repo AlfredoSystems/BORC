@@ -93,7 +93,9 @@
     {"match_id": "F3", "video_link": null, "red_alliance": ["A2", "78", "25", "109", "113"], "blue_alliance": ["A1", "74", "73", "36", "111"], "score_red": 87, "score_blue": 98}
   ],
   "media_gallery": [
-    { "type": "youtube", "url": "https://youtu.be/XnWqzhm5Kfc", "title": "49 - Squidiglets Reveal" },
+    { "type": "youtube", "url": "https://youtu.be/XnWqzhm5Kfc", "title": "49 - Squidiglets Reveal" }
+  ],
+  "unlisted": [
     { "type": "youtube", "url": "https://youtu.be/GgPQxPl-fks", "title": "67 - CATalytic Reveal" },
     { "type": "youtube", "url": "https://youtu.be/hFWzDoMEnas", "title": "73 - Mildstang" },
     { "type": "youtube", "url": "https://youtu.be/jVq4nufRk7s", "title": "83 - Pink Fluffy Unicorns Reveal" }
