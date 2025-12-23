@@ -379,7 +379,14 @@
                         videosContainer.classList.remove('hidden');
                         videosGrid.innerHTML = '';
                         videos.forEach(video => {
-                            const videoId = new URL(video.url).searchParams.get('v') || video.url.split('/').pop();
+                            let videoId;
+                            try {
+                                // Handles standard youtube.com/watch?v=... links
+                                videoId = new URL(video.url).searchParams.get('v');
+                            } catch (e) {
+                                // Handles youtu.be/... short links
+                                videoId = video.url.split('/').pop().split('?')[0];
+                            }
                             const thumbnailUrl = `https://i.ytimg.com/vi/${videoId}/hqdefault.jpg`;
                             
                             const videoCard = `
