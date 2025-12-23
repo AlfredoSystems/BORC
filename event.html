@@ -262,28 +262,33 @@
                     const imageCell = row.insertCell();
                     imageCell.className = 'px-6 py-4 text-center';
 
-                    // Path for the .webp image
-                    const imageBase = `./events/${eventId}/robots/${robot.team_number}`;
-                    const webpPath = `${imageBase}.jpg`;
+                    // Asynchronously find and set the robot image
+                    (async () => {
+                        const imageBase = `./events/${eventId}/robots/${robot.team_number}`;
+                        const extensions = ['jpg', 'webp', 'png', 'jpeg', 'gif'];
+                        let imagePath = null;
 
-                    // Create the <img> element for the .webp image
-                    const img = document.createElement('img');
-                    img.src = webpPath;
-                    img.alt = `Image of ${robot.name}`;
-                    img.className = "h-20 w-32 object-cover mx-auto rounded-md robot-image-thumbnail";
-                    img.loading = 'lazy';
+                        for (const ext of extensions) {
+                            const path = `${imageBase}.${ext}`;
+                            const res = await fetch(path, { method: 'HEAD' });
+                            if (res.ok) {
+                                imagePath = path;
+                                break;
+                            }
+                        }
 
-                    // If the .webp image fails to load, display "No Image"
-                    img.onerror = () => {
-                        const noImageText = document.createTextNode('No Image');
-                        const textSpan = document.createElement('span');
-                        textSpan.className = 'text-xs text-gray-400';
-                        textSpan.appendChild(noImageText);
-                        img.parentNode.replaceChild(textSpan, img);
-                    };
-
-                    img.onclick = () => openModal(img.src);
-                    imageCell.appendChild(img);
+                        if (imagePath) {
+                            const img = document.createElement('img');
+                            img.src = imagePath;
+                            img.alt = `Image of ${robot.name}`;
+                            img.className = "h-20 w-32 object-cover mx-auto rounded-md robot-image-thumbnail";
+                            img.loading = 'lazy';
+                            img.onclick = () => openModal(img.src);
+                            imageCell.appendChild(img);
+                        } else {
+                            imageCell.innerHTML = `<span class="text-xs text-gray-400">No Image</span>`;
+                        }
+                    })();
                 });
 
                 // 7. Populate Matches Table
